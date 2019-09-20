@@ -1,0 +1,32 @@
+### Packer ###
+
+packer_cache/
+packer.log
+
+*.iso
+*.box
+*.ovf
+*.vmdk
+*.vdi
+*.variables.json
+
+### Misc ###
+
+*~
+*.bak
+*.swp
+.DS_Store
+.bundle/
+
+### Ansible ###
+
+*.retry
+
+### Vagrant ###
+
+.vagrant/
+
+### VSCode ###
+
+.vscode/**
+!.vscode/settings.json
