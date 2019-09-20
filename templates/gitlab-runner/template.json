@@ -6,6 +6,8 @@
     "image_name": "gitlab-runner_ubuntu1804_{{ isotime \"20060102-150405\" }}.packer",
     "image_description": "GitLab Runner running on Ubuntu 18.04",
 
+    "docker_machine_version": "0.16.2",
+
     "aws_region": "us-east-1",
     "aws_source_ami_id": "",
     "aws_source_ami_owners": "099720109477",
@@ -87,6 +89,13 @@
       "galaxy_file": "requirements.yml",
       "galaxy_force_install": true,
       "extra_arguments": ["-v"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo curl -L -o /usr/local/bin/docker-machine https://github.com/docker/machine/releases/download/v{{ user `docker_machine_version` }}/docker-machine-$( uname -s )-$( uname -m )",
+        "sudo chmod -v 755 /usr/local/bin/docker-machine"
+      ]
     },
     {
       "type": "shell",
