@@ -1,0 +1,52 @@
+{
+  "min_packer_version": "1.4.0",
+
+  "variables": {
+    "template_version": "0.0.1",
+
+    "digitalocean_region": "nyc3",
+    "digitalocean_image": "ubuntu-18-04-x64",
+    "digitalocean_size": "s-1vcpu-1gb",
+    "digitalocean_snapshot_name": "gitlab-runner-ubuntu1804_v{{ user `template_version` }}_{{ isotime \"20060102-150405\" }}.packer"
+  },
+
+  "builders": [
+    {
+      "type": "digitalocean",
+      "region": "{{ user `digitalocean_region` }}",
+      "image": "{{ user `digitalocean_image` }}",
+      "size": "{{ user `digitalocean_size` }}",
+      "snapshot_name": "{{ user `digitalocean_snapshot_name` }}",
+      "ssh_username": "root",
+      "tags": [
+        "development-tools",
+        "packer-created"
+      ]
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "../_scripts/wait-cloud-init.sh",
+        "../_scripts/apt-upgrade.sh"
+      ]
+    },
+    {
+      "type": "ansible",
+      "playbook_file": "playbook.yml",
+      "galaxy_file": "requirements.yml",
+      "galaxy_force_install": true,
+      "extra_arguments": ["-v"]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash",
+        "sudo apt install gitlab-runner",
+        "sudo systemctl enable gitlab-runner"
+      ]
+    }
+  ]
+}
