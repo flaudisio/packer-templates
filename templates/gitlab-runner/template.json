@@ -3,7 +3,7 @@
 
   "variables": {
     "creator": "Flaudisio",
-    "image_name": "gitlab-runner_ubuntu1804_{{ isotime \"20060102-150405\" }}.packer",
+    "image_name": "gitlab-runner_ubuntu1804_{{ isotime \"20060102-150405-UTC\" }}.packer",
     "image_description": "GitLab Runner running on Ubuntu 18.04",
 
     "docker_machine_version": "0.16.2",
