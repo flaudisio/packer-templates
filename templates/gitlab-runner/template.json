@@ -2,22 +2,70 @@
   "min_packer_version": "1.4.0",
 
   "variables": {
-    "template_version": "0.0.1",
+    "creator": "Flaudisio",
+    "image_name": "gitlab-runner_ubuntu1804_{{ isotime \"20060102-150405\" }}.packer",
+    "image_description": "GitLab Runner running on Ubuntu 18.04",
+
+    "aws_region": "us-east-1",
+    "aws_source_ami_id": "",
+    "aws_source_ami_owners": "099720109477",
+    "aws_source_ami_filter_name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
+    "aws_source_ami_architecture": "x86_64",
+    "aws_instance_type": "t3.micro",
+    "aws_subnet_id": "",
+    "aws_ssh_username": "ubuntu",
+    "aws_ami_name": "{{ user `image_name` }}",
+    "aws_ami_description": "{{ user `image_description` }}",
 
     "digitalocean_region": "nyc3",
     "digitalocean_image": "ubuntu-18-04-x64",
     "digitalocean_size": "s-1vcpu-1gb",
-    "digitalocean_snapshot_name": "gitlab-runner-ubuntu1804_v{{ user `template_version` }}_{{ isotime \"20060102-150405\" }}.packer"
+    "digitalocean_snapshot_name": "{{ user `image_name` }}",
+    "digitalocean_ssh_username": "root"
   },
 
   "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{ user `aws_region` }}",
+      "source_ami": "{{ user `aws_source_ami_id` }}",
+      "source_ami_filter": {
+        "filters": {
+          "name": "{{ user `aws_source_ami_filter_name` }}",
+          "architecture": "{{ user `aws_source_ami_architecture` }}",
+          "root-device-type": "ebs",
+          "state": "available",
+          "virtualization-type": "hvm"
+        },
+        "owners": ["{{ user `aws_source_ami_owners` }}"],
+        "most_recent": true
+      },
+      "instance_type": "{{ user `aws_instance_type` }}",
+      "subnet_id": "{{ user `aws_subnet_id` }}",
+      "associate_public_ip_address": true,
+      "ssh_username": "{{ user `aws_ssh_username` }}",
+      "run_tags": {
+        "Name": "Packer Builder - {{ user `aws_ami_name` }}",
+        "packer/creator": "{{ user `creator` }}"
+      },
+      "ami_name": "{{ user `aws_ami_name` }}",
+      "ami_description": "{{ user `aws_ami_description` }}",
+      "tags": {
+        "Name": "{{ user `aws_ami_name` }}",
+        "packer/created-at": "{{ isotime \"20060102-150405\" }}",
+        "packer/creator": "{{ user `creator` }}",
+        "packer/packer-version": "{{ packer_version }}",
+        "packer/source-ami-name": "{{ .SourceAMIName }}",
+        "packer/source-ami-owners": "{{ user `aws_source_ami_owners` }}"
+      }
+    },
     {
       "type": "digitalocean",
       "region": "{{ user `digitalocean_region` }}",
       "image": "{{ user `digitalocean_image` }}",
       "size": "{{ user `digitalocean_size` }}",
       "snapshot_name": "{{ user `digitalocean_snapshot_name` }}",
-      "ssh_username": "root",
+      "ssh_username": "{{ user `digitalocean_ssh_username` }}",
       "tags": [
         "development-tools",
         "packer-created"
