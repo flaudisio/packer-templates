@@ -12,7 +12,7 @@
 Clone the repository:
 
 ```console
-$ git clone git@gitlab.com:ftolentino/packer-templates.git
+$ git clone https://github.com/flaudisio/packer-templates.git
 
 $ cd packer-templates/
 ```
@@ -27,7 +27,7 @@ $ export AWS_SECRET_ACCESS_KEY=<SECRET_KEY>
 $ export DIGITALOCEAN_API_TOKEN=<API_TOKEN>
 ```
 
-Validate & build the image!
+Validate & build the image(s)!
 
 ```console
 $ packer validate template.json
