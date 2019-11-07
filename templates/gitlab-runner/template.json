@@ -23,7 +23,8 @@
     "digitalocean_image": "ubuntu-18-04-x64",
     "digitalocean_size": "s-1vcpu-1gb",
     "digitalocean_snapshot_name": "{{ user `image_name` }}",
-    "digitalocean_ssh_username": "root"
+    "digitalocean_ssh_username": "root",
+    "digitalocean_tags": "packer-created,ci-cd"
   },
 
   "builders": [
@@ -68,10 +69,7 @@
       "size": "{{ user `digitalocean_size` }}",
       "snapshot_name": "{{ user `digitalocean_snapshot_name` }}",
       "ssh_username": "{{ user `digitalocean_ssh_username` }}",
-      "tags": [
-        "development-tools",
-        "packer-created"
-      ]
+      "tags": "{{ user `digitalocean_tags` }}"
     }
   ],
 
