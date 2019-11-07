@@ -7,6 +7,7 @@
     "image_description": "GitLab Runner on Ubuntu 18.04",
 
     "docker_machine_version": "0.16.2",
+    "gitlab_runner_version": "12.3.0",
 
     "aws_region": "us-east-1",
     "aws_source_ami_id": "",
@@ -99,7 +100,7 @@
       "type": "shell",
       "inline": [
         "curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash",
-        "sudo apt install gitlab-runner",
+        "sudo apt install gitlab-runner={{ user `gitlab_runner_version` }}",
         "sudo systemctl enable gitlab-runner"
       ]
     }
