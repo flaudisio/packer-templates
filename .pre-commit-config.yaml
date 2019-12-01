@@ -20,7 +20,7 @@ repos:
         types: [file, yaml]
         entry: yamllint --strict
   - repo: git://github.com/flaudisio/pre-commit-hooks
-    rev: v0.4.0
+    rev: v0.6.0
     hooks:
       - id: packer-validate
         files: ^templates/.+\.json$
