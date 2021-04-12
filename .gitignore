@@ -1,32 +1,69 @@
-### Packer ###
+# ------------------------------------------------------------------------------
+# OPERATING SYSTEMS
+# ------------------------------------------------------------------------------
 
-packer_cache/
-packer.log
+### macOS/Linux/Windows ###
 
-*.iso
-*.box
-*.ovf
-*.vmdk
-*.vdi
-*.variables.json
-
-### Misc ###
-
-*~
-*.bak
-*.swp
 .DS_Store
-.bundle/
+.AppleDouble
+.LSOverride
 
-### Ansible ###
+.Trash-*
 
-*.retry
+Thumbs.db
+[Dd]esktop.ini
+*.lnk
 
-### Vagrant ###
+# ------------------------------------------------------------------------------
+# EDITORS
+# ------------------------------------------------------------------------------
 
-.vagrant/
+### Vim ###
+
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+### JetBrains (IntelliJ, PyCharm, etc) ###
+
+.idea
+*.iml
+*.ipr
+*.iws
+/out
+
+### Sublime Text ###
+
+*.sublime-project
+*.sublime-workspace
 
 ### VSCode ###
 
 .vscode/**
-!.vscode/settings.json
+!.vscode/README.md
+!.vscode/extensions.json
+!.vscode/recommended-*.json
+!.vscode/setup.sh
+
+# ------------------------------------------------------------------------------
+# ANSIBLE
+# ------------------------------------------------------------------------------
+
+*.retry
+
+# ------------------------------------------------------------------------------
+# PACKER
+# ------------------------------------------------------------------------------
+
+# Cache objects
+packer_cache/
+
+# Crash log
+crash.log
+
+### Packer Patch ###
+# ignore temporary output files
+output-*/

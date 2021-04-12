@@ -1,11 +1,11 @@
 # Packer Templates
 
-[Packer](https://packer.io/intro/index.html) templates to create some ready-to-use images.
+[Packer](https://packer.io/intro/index.html) templates to create cloud images.
 
 ## Requirements
 
-- Packer 1.4.0+
-- Ansible 2.8+
+- Packer >= 1.7.0
+- Ansible >= 2.8
 
 ## Usage
 
@@ -27,19 +27,28 @@ $ export AWS_SECRET_ACCESS_KEY=<SECRET_KEY>
 $ export DIGITALOCEAN_API_TOKEN=<API_TOKEN>
 ```
 
-Validate & build the image(s)!
+Validate and build the images:
 
 ```console
-$ packer validate template.json
-$ packer build template.json
+$ packer validate .
+$ packer build .
 ```
 
-If applicable, use `-only` to build a specific image:
+If applicable, use `-only` to build specific images:
 
 ```console
-$ packer validate -only=amazon-ebs template.json
-$ packer build -only=amazon-ebs template.json
+$ packer build -only amazon-ebs.main .
+$ packer build -only digitalocean.main .
 ```
+
+## Conventions
+
+- All manifest filenames **must** end with `.pkr.hcl`
+
+- A template **must** have the following files:
+  - `versions.pkr.hcl`: required Packer version and plugins (if applicable)
+  - `variables.pkr.hcl`: only the template variables
+  - `build.pkr.hcl`: locals, data sources, sources and builds
 
 ## License
 
