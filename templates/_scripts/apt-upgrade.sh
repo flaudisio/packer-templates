@@ -1,6 +1,8 @@
 #!/bin/sh
 
-set -eux
+set -e
+set -u
+set -x
 
 sudo apt update
 
