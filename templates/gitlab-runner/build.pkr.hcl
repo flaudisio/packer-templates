@@ -87,8 +87,8 @@ build {
 
   provisioner "ansible" {
     extra_arguments      = ["-v"]
-    playbook_file        = "playbook.yml"
-    galaxy_file          = "requirements.yml"
+    playbook_file        = "ansible/playbook.yml"
+    galaxy_file          = "ansible/requirements.yml"
     galaxy_force_install = true
   }
 
