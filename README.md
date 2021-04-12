@@ -27,7 +27,7 @@ $ export AWS_SECRET_ACCESS_KEY=<SECRET_KEY>
 $ export DIGITALOCEAN_API_TOKEN=<API_TOKEN>
 ```
 
-Validate and build the images!
+Validate and build the images:
 
 ```console
 $ packer validate .
@@ -37,7 +37,6 @@ $ packer build .
 If applicable, use `-only` to build specific images:
 
 ```console
-$ packer validate -only aws .
 $ packer build -only amazon-ebs.main .
 $ packer build -only digitalocean.main .
 ```
