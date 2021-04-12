@@ -41,6 +41,15 @@ $ packer build -only amazon-ebs.main .
 $ packer build -only digitalocean.main .
 ```
 
+## Conventions
+
+- All manifest filenames **must** end with `.pkr.hcl`
+
+- A template **must** have the following files:
+  - `versions.pkr.hcl`: required Packer version and plugins (if applicable)
+  - `variables.pkr.hcl`: only the template variables
+  - `build.pkr.hcl`: locals, data sources, sources and builds
+
 ## License
 
 [MIT](LICENSE).
